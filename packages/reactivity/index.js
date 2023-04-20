@@ -1,7 +1,3 @@
 'use strict'
 
-if (process.env.NODE_ENV === 'production') {
-  module.exports = require('./dist/reactivity.cjs.prod.js')
-} else {
-  module.exports = require('./dist/reactivity.cjs.js')
-}
+module.exports = process.env.NODE_ENV === 'production' ? require('./dist/reactivity.cjs.prod.js') : require('./dist/reactivity.cjs.js')
