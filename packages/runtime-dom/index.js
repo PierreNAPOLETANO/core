@@ -1,7 +1,3 @@
 'use strict'
 
-if (process.env.NODE_ENV === 'production') {
-  module.exports = require('./dist/runtime-dom.cjs.prod.js')
-} else {
-  module.exports = require('./dist/runtime-dom.cjs.js')
-}
+module.exports = process.env.NODE_ENV === 'production' ? require('./dist/runtime-dom.cjs.prod.js') : require('./dist/runtime-dom.cjs.js');

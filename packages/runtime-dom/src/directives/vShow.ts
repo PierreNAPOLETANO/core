@@ -29,9 +29,7 @@ export const vShow: ObjectDirective<VShowElement> = {
         setDisplay(el, true)
         transition.enter(el)
       } else {
-        transition.leave(el, () => {
-          setDisplay(el, false)
-        })
+        transition.leave(el, () => setDisplay(el, false))
       }
     } else {
       setDisplay(el, value)

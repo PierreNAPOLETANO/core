@@ -29,10 +29,9 @@ export function ssrRenderAttrs(
     ) {
       continue
     }
-    const value = props[key]
-    if (key === 'class') {
+    if (props[key] === 'class') {
       ret += ` class="${ssrRenderClass(value)}"`
-    } else if (key === 'style') {
+    } else if (props[key] === 'style') {
       ret += ` style="${ssrRenderStyle(value)}"`
     } else {
       ret += ssrRenderDynamicAttr(key, value, tag)

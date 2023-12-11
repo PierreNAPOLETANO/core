@@ -34,13 +34,9 @@ export const nodeOps: Omit<RendererOptions<Node, Element>, 'patchProp'> = {
 
   createComment: text => doc.createComment(text),
 
-  setText: (node, text) => {
-    node.nodeValue = text
-  },
+  setText: (node, text) => node.nodeValue = text,
 
-  setElementText: (el, text) => {
-    el.textContent = text
-  },
+  setElementText: (el, text) => el.textContent = text,
 
   parentNode: node => node.parentNode as Element | null,
 

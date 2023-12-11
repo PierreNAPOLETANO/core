@@ -198,11 +198,7 @@ export function pipeToWebWritable(
       if (hasReady) {
         await writer.ready
       }
-      if (content != null) {
-        return writer.write(encoder.encode(content))
-      } else {
-        return writer.close()
-      }
+      return content != null ? writer.write(encoder.encode(content)) : writer.close()
     },
     destroy(err) {
       // TODO better error handling?

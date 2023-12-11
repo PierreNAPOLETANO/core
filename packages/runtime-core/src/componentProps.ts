@@ -217,13 +217,7 @@ export function initProps(
     // stateful
     instance.props = isSSR ? props : shallowReactive(props)
   } else {
-    if (!instance.type.props) {
-      // functional w/ optional props, props === attrs
-      instance.props = attrs
-    } else {
-      // functional w/ declared props
-      instance.props = props
-    }
+    instance.props = !instance.type.props ? attrs : props
   }
   instance.attrs = attrs
 }

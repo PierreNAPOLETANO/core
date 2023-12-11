@@ -30,11 +30,9 @@ export const patchProp: DOMRendererOptions['patchProp'] = (
     patchClass(el, nextValue, isSVG)
   } else if (key === 'style') {
     patchStyle(el, prevValue, nextValue)
-  } else if (isOn(key)) {
+  } else if (isOn(key) && !isModelListener(key)) {
     // ignore v-model listeners
-    if (!isModelListener(key)) {
-      patchEvent(el, key, prevValue, nextValue, parentComponent)
-    }
+    patchEvent(el, key, prevValue, nextValue, parentComponent)
   } else if (
     key[0] === '.'
       ? ((key = key.slice(1)), true)
@@ -74,11 +72,7 @@ function shouldSetAsProp(
   if (isSVG) {
     // most keys must be set as attribute on svg elements to work
     // ...except innerHTML & textContent
-    if (key === 'innerHTML' || key === 'textContent') {
-      return true
-    }
-    // or native onclick with function values
-    if (key in el && isNativeOn(key) && isFunction(value)) {
+    if ((key === 'innerHTML' || key === 'textContent') || (key in el && isNativeOn(key) && isFunction(value))) {
       return true
     }
     return false

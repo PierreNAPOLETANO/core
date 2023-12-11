@@ -120,12 +120,10 @@ export const createSSRApp = ((...args) => {
 
   const { mount } = app
   app.mount = (containerOrSelector: Element | ShadowRoot | string): any => {
-    const container = normalizeContainer(containerOrSelector)
-    if (container) {
-      return mount(container, true, container instanceof SVGElement)
+    if (normalizeContainer(containerOrSelector)) {
+      return mount(normalizeContainer(containerOrSelector), true, normalizeContainer(containerOrSelector) instanceof SVGElement)
     }
   }
-
   return app
 }) as CreateAppFunction<Element>
 

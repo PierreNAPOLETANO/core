@@ -47,8 +47,7 @@ export const vModelText: ModelDirective<
 > = {
   created(el, { modifiers: { lazy, trim, number } }, vnode) {
     el[assignKey] = getModelAssigner(vnode)
-    const castToNumber =
-      number || (vnode.props && vnode.props.type === 'number')
+    const castToNumber = number || (vnode.props && vnode.props.type === 'number')
     addEventListener(el, lazy ? 'change' : 'input', e => {
       if ((e.target as any).composing) return
       let domValue: string | number = el.value
@@ -227,11 +226,7 @@ function setSelected(el: HTMLSelectElement, value: any) {
     const option = el.options[i]
     const optionValue = getValue(option)
     if (isMultiple) {
-      if (isArray(value)) {
-        option.selected = looseIndexOf(value, optionValue) > -1
-      } else {
-        option.selected = value.has(optionValue)
-      }
+      option.selected = isArray(value) ? looseIndexOf(value, optionValue) > -1 : value.has(optionValue)
     } else {
       if (looseEqual(getValue(option), value)) {
         if (el.selectedIndex !== i) el.selectedIndex = i

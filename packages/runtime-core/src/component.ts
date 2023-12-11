@@ -570,11 +570,7 @@ export function createComponentInstance(
     ec: null,
     sp: null
   }
-  if (__DEV__) {
-    instance.ctx = createDevRenderContext(instance)
-  } else {
-    instance.ctx = { _: instance }
-  }
+  instance.ctx = __DEV__ ? createDevRenderContext(instance) : { _: instance }
   instance.root = parent ? parent.root : instance
   instance.emit = emit.bind(null, instance)
 

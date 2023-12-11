@@ -62,11 +62,8 @@ export async function renderToString(
   // provide the ssr context to the tree
   input.provide(ssrContextKey, context)
   const buffer = await renderComponentVNode(vnode)
-
   const result = await unrollBuffer(buffer as SSRBuffer)
-
   await resolveTeleports(context)
-
   if (context.__watcherHandles) {
     for (const unwatch of context.__watcherHandles) {
       unwatch()
